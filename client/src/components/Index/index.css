@@ -1,0 +1,28 @@
+.indexButton {
+    margin-top: 10%;
+    height: 10%;
+    width: 10%;
+    animation-name: spin;
+    animation-duration: 30000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    filter: contrast(100%) brightness(100px);
+
+}
+
+.indexPlane {
+    position:relative;
+    margin-top:2%;
+
+}
+
+
+  
+  @keyframes spin {
+      from {
+          transform:rotate(360deg);
+      }
+      to {
+          transform:rotate(00deg);
+      }
+  }
