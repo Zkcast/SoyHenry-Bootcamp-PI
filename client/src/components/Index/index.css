@@ -2,6 +2,8 @@
     margin-top: 10%;
     height: 10%;
     width: 10%;
+    min-width: 100px;
+    min-width: 100px;
     animation-name: spin;
     animation-duration: 30000ms;
     animation-iteration-count: infinite;

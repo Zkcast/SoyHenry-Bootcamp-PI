@@ -18,15 +18,15 @@ export const Index = () => {
 
   return (
     <div>
-  <Link to='/home'>
-  <img 
-  onMouseOver={handleHover}
-  onMouseOut={handleHover}
-  src={plane} 
-  className='indexButton'/>
-  
-  </Link>
-  {visual_plane && <h5 className='indexPlane'>CLICK TO ENTER</h5>}
+      <Link to='/home'>
+        <img
+          onMouseOver={handleHover}
+          onMouseOut={handleHover}
+          src={plane}
+          className='indexButton' />
+
+      </Link>
+      {visual_plane && <h5 className='indexPlane'>CLICK TO ENTER</h5>}
 
     </div>
   )

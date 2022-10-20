@@ -8,52 +8,52 @@ import './navbar.css'
 
 export const NavBar = () => {
 
-const dispatch = useDispatch()
-const [input, setInput] = useState("")
+  const dispatch = useDispatch()
+  const [input, setInput] = useState("")
 
 
-function changeHandler(e) {
+  function changeHandler(e) {
     const inputValue = e.target.value;
     var letters = /^[A-Za-z\s]*$/
 
     if (e.target.value.match(letters) && input.length < 45) {
       dispatch(navBarInput(inputValue))
       setInput(inputValue)
-      dispatch(applyFilters()) 
+      dispatch(applyFilters())
       dispatch(resetNavigation())
     }
-    if (input.length == 45) {setInput('')}
-}
+    if (input.length == 45) { setInput('') }
+  }
 
-const submitHandler = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
-}
+  }
 
-const handleClick = () => {
-  dispatch(applyRefresh())
-  dispatch(getAllCountries())
-}
+  const handleClick = () => {
+    dispatch(applyRefresh())
+    dispatch(getAllCountries())
+  }
 
   return (
-<div>
-    
-    <form onSubmit={submitHandler}>
-    <Link onClick={handleClick} to='/'><img className='home_img'src={HomeIMG}/></Link>
-        <input 
-        value={input}
-        className='navbarinput'
-        autoComplete="off"
-        type='text' 
-        autoCorrect='off'
-        name='Input' 
-        id='NavbarInput'
-        placeholder='Search a country'
-        onChange={changeHandler}
+    <div>
+
+      <form onSubmit={submitHandler}>
+        <Link onClick={handleClick} to='/'><img className='home_img' src={HomeIMG} /></Link>
+        <input
+          value={input}
+          className='navbarinput'
+          autoComplete="off"
+          type='text'
+          autoCorrect='off'
+          name='Input'
+          id='NavbarInput'
+          placeholder='Search a country'
+          onChange={changeHandler}
         ></input>
-    </form>
-        
-    
-</div>
+      </form>
+
+
+    </div>
   )
 }
 

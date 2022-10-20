@@ -11,6 +11,8 @@
 .activityContainer {
     width: fit-content;
     height: fit-content;
+    max-width: 162px;
+    max-height: 240px;
     background-size:cover;
     background-color: rgba(240, 248, 255, 0);
     backdrop-filter: blur(5px) contrast(0.9) saturate(20%);
@@ -29,8 +31,30 @@
     transition: transform 0.4s ease-in-out;
 }
 
-.activityContainer:hover {
+.mainActivityContainer {
+        width: fit-content;
+        height: fit-content;
+        max-width: 162px;
+        max-height: 240px;
+        background-size:cover;
+        background-color: rgba(0, 136, 255, 0.3);
+        backdrop-filter: blur(5px) contrast(0.9) saturate(20%);
+        border-top: 4px rgba(56, 56, 56, 0.5); 
+        border-left: 0px;
+        border-right: 0px;
+        border-bottom: 0px;
+        border-style:double;
+        border-radius: 1%;
+        margin-left:0.2rem;
+        margin-right: 0rem;
+        margin-bottom: 1.5rem;
+        padding-left: 1%;
+        padding-right: 1%;
+        padding-bottom:1.5%;
+        transition: transform 0.4s ease-in-out;
+}
 
+.activityContainer:hover {
     border-top: 4px rgb(0, 132, 255); 
     border-left: 0px;
     border-right: 0px;
@@ -40,10 +64,21 @@
 
 }
 
-
-.rating {
-    padding-bottom: 0px;
+.activity__name {
+    font-size: 26px;
+    margin-top: 3%;
 }
+
+.difficulty {
+    font-size: 15px;
+    margin-top: -5%;
+    margin-bottom: -18%;
+}
+.difficulty_stars {
+    margin-top: -10%;
+    margin-bottom: -3%;
+}
+
 
 .go_home {
     float: left;
@@ -72,8 +107,9 @@
     margin-bottom: 1.5rem;
     padding-left: 1%;
     padding-right: 1%;
+    padding-bottom:1.2%;
     width: 162px;
-    height: 260px;
+    height: 240px;
     border-top: 4px rgba(56, 56, 56, 0.5); 
     border-left: 0px;
     border-right: 0px;
@@ -89,8 +125,6 @@
     border-style:double;
     border-radius: 1%;
 }
-
-
 
 .country_icon {
     background-size:cover;

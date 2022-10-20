@@ -8,7 +8,6 @@ router.get('/', async (req, res) => {
 
     try {
         const allCountries = await Country.findAll({include: Activity});
-    
         if (name) {
          const match = await allCountries.filter(country => country.name.toLowerCase().startsWith(name.toLowerCase()))
          match.length ? res.json(match) : res.status(404).send({ 'Error': 'No country matched with that name' })
@@ -27,27 +26,6 @@ router.get('/:id', async (req, res) => {
     try {
 
         country = await Country.findByPk(id.toUpperCase(), { include: Activity })
-
-        // country = {
-        //     id: country.id,
-        //     name: country.name,
-        //     image: country.image,
-        //     continent: country.continent,
-        //     capital: country.capital,
-        //     subregion: country.subregion,
-        //     area: country.area,
-        //     population: country.population,
-        //     maps: country.maps,
-        //     activities: country.activities?.map((act) => {
-        //         return {
-        //             id: act.id,
-        //             name: act.name,
-        //             difficulty: act.difficulty,
-        //             duration: act.duration,
-        //             season: act.season
-        //         }
-        //     })
-        // }
 
         if (id.toUpperCase() == country.id) {
             res.json(country)

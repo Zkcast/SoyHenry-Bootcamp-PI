@@ -34,11 +34,15 @@ class App extends Component {
       </Switch>
 
       <Switch>
-        <Route exact path='/activities/add' component={AddActivity} />
+        <Route exact path='/activities/:id' component={Activities} />
       </Switch>
 
       <Switch>
-        <Route exact path='/activities/add/:id' component={AddActivity} />
+        <Route exact path='/activity/add' component={AddActivity} />
+      </Switch>
+
+      <Switch>
+        <Route exact path='/activity/add/:id' component={AddActivity} />
       </Switch>
 
       </div>

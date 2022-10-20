@@ -9,6 +9,15 @@ router.get('/', async (req, res) => {
     res.json(allActivities)
 });
 
+router.get('/:id', async (req, res) => {
+    const {id} = req.params 
+    try {
+    const finder = await Activity.findOne({ where: { id: id } })
+    res.json(finder) 
+    } catch (error) {
+    res.status(400).json(error.message)
+    }
+});
 
 router.post('/', async (req, res) => {
     const {
@@ -35,7 +44,6 @@ router.post('/', async (req, res) => {
         await activity.setCountries(countries)
         res.status(200).json({msg: `Actividad ${activity.name} creada correctamente`})
 
-//CIV, AGO, ASM, CHN
         }
 
     } catch (error) {

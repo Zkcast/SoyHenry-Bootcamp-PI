@@ -9,26 +9,29 @@ export const AddActivity = (props) => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    useEffect( () => {
-            dispatch(getAllCountries())
-            dispatch(getAllActivities())
-            let id = props.match.params.id
-            if (id && !input.countries.includes(id)) {
-                setInput({...input, countries: input.countries.concat(id)})
-                handleFullCountry(id)
-            }
-            if (allActivities.some(act => act.name === id)) {
-                setInput({...input, name: id})
-            }
+    useEffect(() => {
+        
+        dispatch(getAllCountries())
+        dispatch(getAllActivities())
+        let id = props.match.params.id
+
+        if (id && !input.countries.includes(id)) {
+            setInput({ ...input, countries: input.countries.concat(id) })
+            handleFullCountry(id)
+        }
+        if (allActivities.some(act => act.name === id)) {
+            setInput({ ...input, name: id })
+        }
 
     }, [])
 
     // ---- Selectors ---
     const allActivities = useSelector(state => state.allActivities)
     const allCountries = useSelector(state => state.allCountries).sort((a, b) => {
-        if(a.name < b.name){return -1;}
-        if(a.name > b.name){return 1;}
-        return 0;})
+        if (a.name < b.name) { return -1; }
+        if (a.name > b.name) { return 1; }
+        return 0;
+    })
 
 
     // ---- Local States ----
@@ -39,12 +42,10 @@ export const AddActivity = (props) => {
         season: '',
         countries: []
     })
+
     const [selectedFullCountries, setFullCountry] = useState([])
     const [hover, setHover] = useState(0);
-    const [errors, setErrors] = useState({
-        input: ''
-    })
-
+    const existingActivity = allActivities.some(act => act.name == input.name)
 
     // ---- Handlers ----
     const handleFullCountry = (id) => {
@@ -61,36 +62,41 @@ export const AddActivity = (props) => {
         if (e.target.name === 'name' && inputValue.match(letters)) {
             setInput({
                 ...input,
-                [e.target.name]: input.name.length == 0 ? e.target.value.toUpperCase() : e.target.value 
+                [e.target.name]: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)
             })
 
         } else if (e.target.name === 'countries') {
-            if (!(input.countries.some(country => country == e.target.value))){
-            setInput({
-                ...input,
-                [e.target.name]: input.countries.concat(e.target.value)
-            })
-            handleFullCountry(e.target.value)
-        }
+            if (!(input.countries.some(country => country == e.target.value))) {
+                setInput({
+                    ...input,
+                    [e.target.name]: input.countries.concat(e.target.value)
+                })
+                handleFullCountry(e.target.value)
+            }
 
         } else if (e.target.name !== 'name') {
             setInput({
                 ...input,
                 [e.target.name]: e.target.value
-            })}
+            })
+        }
     }
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (input.name.length > 3) {
         dispatch(addActivity(input))
-        history.push('/activities')
-            alert('Activity successfully created')
+        history.push(`/activities/${input.name}`)
+        if (existingActivity) {
+            alert(`Countries successfully added to ${input.name}`)
         } else {
-            alert('Name must have at least 4 characters.')
+            alert(`Activity ${input.name} successfully created`)
         }
-        
+    }
 
+    const handleSubmitError = (e) => {
+        e.preventDefault();
+        alert('Name must have at least 3 characters.')
     }
 
     const handleIconDelete = (e) => {
@@ -102,123 +108,126 @@ export const AddActivity = (props) => {
     }
 
 
-  return (
-    <div>
-        <Link className='go_home'to='/home'><button className='go_home_button'>&#x276E; Home</button></Link>
 
-        <h1>Create/ADD new activity</h1>
-        <div className='form_container'>
-            <form onSubmit={handleSubmit}>
+    return (
+        <div>
+            <Link className='go_home' to='/home'><button className='go_home_button'>&#x276E; Home</button></Link>
 
-            {/* ACTIVITY NAME INPUT */}
-                <div className='add_activityname'>
-                    <label>Activity: </label>
-                    <input 
-                    autoComplete="off"
-                    autoCorrect='off'
-                    className='add_input' 
-                    onChange={inputHandler} 
-                    value={input.name} 
-                    type='text' 
-                    name='name' 
-                    placeholder='Activity name: ' 
-                    required />
-                </div>
-                <div>
-                </div>
-                <hr></hr>
+            <h1>Create/ADD new activity</h1>
+            <div className='form_container'>
+                <form onSubmit={input.name.length > 2 ? handleSubmit : handleSubmitError}>
 
+                    {/* ACTIVITY NAME INPUT */}
 
-            {/* ACTIVITY SEASON INPUT */}
-                <div className='add_activityseason'>
-                    <label>Season: </label>
-                    <select name='season' className='add_input' onChange={inputHandler} required>
-                        <option hidden>Select season</option>
-                        <option value='summer'>Summer</option>
-                        <option value='spring'>Spring</option>
-                        <option value='winter'>Winter</option>
-                        <option value='autumn'>Autumn</option>
-                    </select>
-                </div>
-                <hr></hr>
+                    <div className='add_activityname'>
+                        <label>Activity: </label>
+                        <input
+                            autoComplete="off"
+                            autoCorrect='off'
+                            className='add_input'
+                            onChange={inputHandler}
+                            value={input.name}
+                            type='text'
+                            name='name'
+                            placeholder='Activity name: '
+                            required />
+                    </div>
+                    <div>
+                    </div>
+                    <hr></hr>
 
 
-
-            {/* ACTIVITY DURATION INPUT */}   
-                <div className='add_activitydifficulty'>
-                    <label>Duration: </label>
-                    <input name='duration' className='add_input' onChange={inputHandler} type="time" required></input>
-                </div>
-                <hr></hr>
+                    {/* ACTIVITY SEASON INPUT */}
+                    <div className='add_activityseason'>
+                        <label>Season: </label>
+                        <select name='season' className='add_input' onChange={inputHandler} required>
+                            <option hidden>Select season</option>
+                            <option value='summer'>Summer</option>
+                            <option value='spring'>Spring</option>
+                            <option value='winter'>Winter</option>
+                            <option value='autumn'>Autumn</option>
+                        </select>
+                    </div>
+                    <hr></hr>
 
 
 
-            {/* ACTIVITY DIFFICULTY INPUT */}
-                <div className="add_rating">
-                    <label>Difficulty: </label>
-                    {[...Array(5)].map((star, index) => {
-                        index += 1;
-                        return (
-                            <button
-                            type="button"
-                            key={index}
-                            className={index <= (hover || input.rating) ? "on" : "off"}
-                            onClick={() => setInput({...input, difficulty: index})}
-                            onMouseEnter={() => setHover(index)}
-                            onMouseLeave={() => setHover(input.difficulty)}
-                            >
-                            <span className="star">&#9733;</span>
-                        </button>
-                        );
-                    })}
-                </div>
-                <hr></hr>
+                    {/* ACTIVITY DURATION INPUT */}
+                    <div className='add_activitydifficulty'>
+                        <label>Duration: </label>
+                        <input name='duration' className='add_input' onChange={inputHandler} type="time" required></input>
+                    </div>
+                    <hr></hr>
 
 
-            {/* ACTIVITY COUNTRIES INPUT */}
-                <div className='add_activitycountry'>
-                    <label>Countries: </label>
-                    <select name='countries' className='add_input' onChange={inputHandler}  required>
-                        <option value="" hidden>Select Countries</option>
-                            {allCountries.map(country => 
-                                <option value={country.id} 
-                                        flag={country.subregion}
-                                        name='countries'
-                                        key={country.id}>
-                                        {country.name}
+
+                    {/* ACTIVITY DIFFICULTY INPUT */}
+                    <div className="add_rating">
+                        <label>Difficulty: </label>
+                        {[...Array(5)].map((star, index) => {
+                            index += 1;
+                            return (
+                                <button
+                                    type="button"
+                                    key={index}
+                                    className={index <= (hover || input.rating) ? "on" : "off"}
+                                    onClick={() => setInput({ ...input, difficulty: index })}
+                                    onMouseEnter={() => setHover(index)}
+                                    onMouseLeave={() => setHover(input.difficulty)}
+                                >
+                                    <span className="star">&#9733;</span>
+                                </button>
+                            );
+                        })}
+                    </div>
+                    <hr></hr>
+
+
+                    {/* ACTIVITY COUNTRIES INPUT */}
+                    <div className='add_activitycountry'>
+                        <label>Countries: </label>
+                        <select name='countries' className='add_input' onChange={inputHandler} required>
+                            <option value="" hidden>Select Countries</option>
+                            {allCountries.map(country =>
+                                <option value={country.id}
+                                    flag={country.subregion}
+                                    name='countries'
+                                    key={country.id}>
+                                    {country.name}
                                 </option>)}
-                    </select>
-                </div>
+                        </select>
+                    </div>
 
 
 
-            {/* SELECTED COUNTRIES */}
-            <hr></hr>
-                <div className='selected_countries'>
+                    {/* SELECTED COUNTRIES */}
+                    <hr></hr>
+                    <div className='selected_countries'>
 
-                    {selectedFullCountries && selectedFullCountries.map(country => 
-                    <img 
-                    id={country.id}
-                    onClick={handleIconDelete} 
-                    title={`Click to delete ${country.name}`} 
-                    src={country.flag} 
-                    className='country_icon'/>)}
+                        {selectedFullCountries && selectedFullCountries.map(country =>
+                            <img
+                                id={country.id}
+                                onClick={handleIconDelete}
+                                title={`Click to delete ${country.name}`}
+                                src={country.flag}
+                                className='country_icon' />)}
 
-                </div>
+                    </div>
 
 
-            {/* SUBMIT BUTTON */}
-                <button className='add' type="submit">Add Activity</button>
+                    {/* SUBMIT BUTTON */}
+                    <button className='add' type="submit">Add Activity</button>
 
-                <div>
-                    {input.name.length > 0 && input.name.length < 4? <small className='errors'>Name must have at least 4 characters</small> : ''}
-                </div>
+                    <div>
+                        {input.name.length > 0 && input.name.length < 3 ? <small className='errors'>Name must have at least 3 characters</small> : ''}
+                        {existingActivity ? <small className='adding_cuntries_msg'>Adding countries to {input.name}</small> : ''}
+                    </div>
 
-            </form>
+                </form>
+            </div>
+
+
         </div>
-    
-    
-    </div>
-  )
+    )
 }
 

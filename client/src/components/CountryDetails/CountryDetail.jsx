@@ -17,7 +17,7 @@ export const CountryDetail = (props) => {
     const filters = useSelector(state => state.filters)
 
 
-    useEffect( () => {
+    useEffect(() => {
         if (filteredCountries.length < 1) {
             dispatch(getAllCountries())
             dispatch(getAllActivities())
@@ -40,51 +40,55 @@ export const CountryDetail = (props) => {
     // [ ] Población
     // [ ] Actividades turísticas con toda su información asociada
 
-  return (
-<div> 
-    <Link className='go_home'to='/home'><button className='go_home_button'>&#x276E; Home</button></Link>
-    {Country &&     
-                    
-        <div className="container">
+    return (
+        <div>
+            <Link className='go_home' to='/home'><button className='go_home_button'>&#x276E; Home</button></Link>
             <div className='navigator_detail'>
-            <Link className={prevCountry ? 'navBoton_detail' : 'hidden_navBoton_detail'} to={prevCountry && `/detail/${prevCountry.id}`}>&#x276E;</Link>  
+            <Link className={prevCountry ? 'navBoton_detail' : 'hidden_navBoton_detail'} to={prevCountry && `/detail/${prevCountry.id}`}>&#x276E;</Link>
             <Link className={nextCountry ? 'navBoton_detail' : 'hidden_navBoton_detail'} to={nextCountry && `/detail/${nextCountry.id}`}>&#x276F;</Link>
             </div>
-            <h1 className={Country.name.length < 17 ? 'countryname_detail' : 'countryname_small_detail'}>{Country.name.toUpperCase()} ({Country.id})</h1>
-            <img className="countrydetail_flag" src={Country.flag} alt={Country.id}/>
-            <h3 className="">Capital: {Country.capital}</h3>
-            <div><h5 className="">{Country.subregion}</h5></div>
-            <small>Population: {Country.population}</small>
-            <div><small className="">Area: {Country.area}km²</small></div>
-            <small><a target="_blank" href={`https://es.wikipedia.org/wiki/${Country.name}`} className="" >...learn more</a></small>
-            <hr></hr>
-            
-            <div classNameName='Activities'>
-                {Country.Activities.length > 0 ?
-                <div>
-                    <h2>Activities of {Country.name}:</h2>
-                        {
-                        Country.Activities.map((act) => 
-                        <Link to='../activities'><small className="activity_name">
-                            {act.name.toUpperCase()} 
-                            {Country.Activities.indexOf(act) == (Country.Activities.length - 1) ? ' ' : ' /'} 
-                        </small></Link>)
+
+            {Country &&
+
+                <div className="container">
+
+
+
+                    <h1 className={Country.name.length < 17 ? 'countryname_detail' : 'countryname_small_detail'}>{Country.name.toUpperCase()} ({Country.id})</h1>
+                    <img className="countrydetail_flag" src={Country.flag} alt={Country.id} />
+                    <h3 className="">Capital: {Country.capital}</h3>
+                    <div><h5 className="">{Country.subregion}</h5></div>
+                    <small>Population: {Country.population}</small>
+                    <div><small className="">Area: {Country.area}km²</small></div>
+                    <small><a target="_blank" href={`https://es.wikipedia.org/wiki/${Country.name}`} className="" >...learn more</a></small>
+                    <hr></hr>
+
+                    <div>
+                        {Country.Activities.length > 0 ?
+                            <div>
+                                <h2>Activities of {Country.name}:</h2>
+                                {
+                                    Country.Activities.map((act) =>
+                                        <Link to='../activities'><small className="activity_name">
+                                            <Link to={`../activities/${act.name}`}>{act.name.toUpperCase()}</Link>
+                                            {Country.Activities.indexOf(act) == (Country.Activities.length - 1) ? ' ' : ' - '}
+                                        </small></Link>)
+                                }
+                                <div>
+                                    <Link to={`../activity/add/${Country.id}`}><small>+add more</small></Link>
+                                </div>
+                            </div> :
+                            <div>
+                                <h3>There is no activities for {Country.name.toUpperCase()}</h3>
+                                <Link to={`../activity/add/${Country.id}`}><h2>¿Wanna create one?</h2></Link></div>
                         }
-                        <div>
-                            <Link to={`../activities/add/${Country.id}`}><small>+add more</small></Link>
-                        </div>
-                </div> :
-                <div>
-                <h3>There is no activities for {Country.name.toUpperCase()}</h3>
-                <Link to={`../activities/add/${Country.id}`}><h2>¿Wanna create one?</h2></Link></div>
-                }
 
-            </div>
+                    </div>
+                </div>
+            }
         </div>
-}
-  </div>
 
-  )
+    )
 }
 
 

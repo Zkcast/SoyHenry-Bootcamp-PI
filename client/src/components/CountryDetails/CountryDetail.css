@@ -12,16 +12,17 @@ hr {
 }
 
 .container {
-    /* margin-top: 1%; */
-    margin-top: 5%;
+    width: fit-content;
+    height: fit-content;
+    margin-top: 1%;
     margin-bottom: 5%;
-    width: 35%;
-    height: 35%;
+    padding-left: 1%;
+    padding-right: 1%;
     border-radius: 0%;
     padding-bottom: 20px;
     backdrop-filter: blur(50px) contrast(0.9);
-    margin-left: 30%;
-    margin-right: 30%;
+    margin-left: auto;
+    margin-right: auto;
     border-style: double;
     border-color: rgb(149, 149, 149);
     
@@ -40,14 +41,12 @@ hr {
 
 }
 
-
 .countrydetail_div {
     background-color: rgba(255, 255, 255, 0.229);
     border: 4px rgba(249, 249, 249, 0.1); 
 }
 
 .countrydetail_flag {
-    
     width: 35%;
     height: 40%;
     max-height: 100px;
@@ -57,7 +56,6 @@ hr {
     box-shadow:0px 5px 10px rgba(0,0,0,1);
     transition: transform 2s ease-in-out;
     opacity: 80%;
-
 }
 
 .countryname_small_detail {
@@ -67,6 +65,7 @@ hr {
     position:relative;
     top:2%;
 }
+
 .countryname_detail {
     position:relative;
     top:5%;
@@ -80,26 +79,28 @@ hr {
 }
 
 .activity_name {
+    justify-content: space-evenly; 
     margin-left: 1%;
     margin-right: 1%;
     color: white;
 }
 
-
 .navigator_detail {
-    padding-top: 18px;
-    padding-bottom: 5px;
+    justify-content: space-evenly; 
+    padding-top: 1%;
+    margin-top: 1%;
+    font-size: 30px;
 }
 .navBoton_detail {
-    margin-right: 20%;
-    margin-left: 19%;
+    margin-right: 10%;
+    margin-left: 10%;
     background-color: rgba(78, 78, 78, 0);
     border-style:none;
 }
 
 .hidden_navBoton_detail {
-    margin-right: 20%;
-    margin-left: 19%;
+    margin-right: 10%;
+    margin-left: 10%;
     opacity: 25%;
     background-color: rgba(78, 78, 78, 0);
     border-style:none;
