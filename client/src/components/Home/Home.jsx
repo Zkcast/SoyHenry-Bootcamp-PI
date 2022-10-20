@@ -113,7 +113,7 @@ export const Home = () => {
         <div>
 
             <div>
-                <button name='refresh' className='refresh' onClick={handleRefresh}>Refresh</button>
+                <button name='refresh' className='refresh' title='' onClick={handleRefresh}>Refresh</button>
                 <Link to='/activities'><button name='allActivities' className='see_activities_button'>See all activities</button></Link>
                 <button name='henryfilter' className={henryFilter ? 'active' : 'disabled'} onClick={handleHenryFilter}>HenryFilter</button>
             </div>

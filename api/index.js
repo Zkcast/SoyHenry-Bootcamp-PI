@@ -24,33 +24,55 @@ const newDB = async () => {
     }
   })
 
-  allCountries.forEach(async (country) => {
-    try {
-      await Country.findOrCreate({
-        where: country
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  })
+        allCountries.forEach(async (country) => {
+          try {
+            await Country.findOrCreate({
+              where: country
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
+  
+
+
+        activitiesOfWorld.forEach(async (act) => {
+          try {
+
+            await Activity.findOrCreate({
+              where: act
+            })  
+            try {
+              const finder = await Activity.findOne({ where: { name: act.name } })
+              await finder.setCountries(CountriesWhere(act.name))
+            } catch (error) {
+              console.log(error)
+            }
+
+          } catch (error) {
+            console.log(error)
+          }
+        })
+
+
+// Country.bulkCreate(allCountries)
+
 };
 
+// const newActivities = async () => {
+//   for (let act of activitiesOfWorld) {
+//     await Activity.findOrCreate({
+//       where: act,
+//     });
 
-const newActivities = async () => {
-  for (let act of activitiesOfWorld) {
-    await Activity.findOrCreate({
-      where: act,
-    });
-
-    const finder = await Activity.findOne({ where: { name: act.name } })
-    await finder.setCountries(CountriesWhere(act.name))
-  }
-}
+//     const finder = await Activity.findOne({ where: { name: act.name } })
+//     await finder.setCountries(CountriesWhere(act.name))
+//   }
+// }
 
 newDB()
-newActivities()
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ alter: true, force: true }).then(() => {
   server.listen(process.env.PORT, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
