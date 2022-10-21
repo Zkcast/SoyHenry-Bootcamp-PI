@@ -59,7 +59,7 @@ export const AddActivity = (props) => {
         const inputValue = e.target.value;
         var letters = /^[A-Za-z\s]*$/
 
-        if (e.target.name === 'name' && inputValue.match(letters)) {
+        if (e.target.name === 'name' && inputValue.length < 16 && inputValue.match(letters)) {
             setInput({
                 ...input,
                 [e.target.name]: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)
