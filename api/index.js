@@ -24,40 +24,33 @@ const newDB = async () => {
     }
   })
 
+        allCountries.forEach(async (country) => {
+          try {
+            await Country.findOrCreate({
+              where: country
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        })
 
-      try {
-        Country.bulkCreate(allCountries)
-      } catch (error) {
-        console.log(error)
-      }
+        activitiesOfWorld.forEach(async (act) => {
+          try {
 
-        // allCountries.forEach(async (country) => {
-        //   try {
-        //     await Country.findOrCreate({
-        //       where: country
-        //     })
-        //   } catch (error) {
-        //     console.log(error)
-        //   }
-        // })
+            await Activity.findOrCreate({
+              where: act
+            })  
+            try {
+              const finder = await Activity.findOne({ where: { name: act.name } })
+              await finder.setCountries(CountriesWhere(act.name))
+            } catch (error) {
+              console.log(error)
+            }
 
-        // activitiesOfWorld.forEach(async (act) => {
-        //   try {
-
-        //     await Activity.findOrCreate({
-        //       where: act
-        //     })  
-        //     try {
-        //       const finder = await Activity.findOne({ where: { name: act.name } })
-        //       await finder.setCountries(CountriesWhere(act.name))
-        //     } catch (error) {
-        //       console.log(error)
-        //     }
-
-        //   } catch (error) {
-        //     console.log(error)
-        //   }
-        // })
+          } catch (error) {
+            console.log(error)
+          }
+        })
 
 
 // Country.bulkCreate(allCountries)
