@@ -4,7 +4,7 @@
 ## Sobre este proyecto.
 
 <p align="left">
-  <img height="400" src="./worldcountries.png" />
+  <img height="200" src="./worldcountries.png" />
 </p>
 
 
