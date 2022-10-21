@@ -4,7 +4,7 @@
 ## Sobre este proyecto.
 
 <p align="left">
-  <img height="200" src="./worldcountries.png" />
+  <img height="200" src="https://github.com/Zkcast/SoyHenry-Bootcamp-PI/blob/master/worldcountries.PNG" />
 </p>
 
 
