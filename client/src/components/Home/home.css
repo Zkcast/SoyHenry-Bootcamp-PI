@@ -85,15 +85,12 @@ a {
 }
 
 .maps {
-    z-index: 9999999999999;
     position: absolute;
     border-radius: 50%;
     top: -7%;
     left: 41%;
     max-width: 30px;
     max-height: 30px;
-    opacity: 100%;
-    border-style: double;
     border-color:rgb(0, 0, 0);
 }
 
