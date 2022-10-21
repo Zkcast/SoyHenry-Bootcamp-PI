@@ -22,9 +22,21 @@ export const APPLY_REFRESH = "APPLY_REFRESH"
 //     }
 // }
 
-export function getAllCountries() {
+
+// valido para desarrollo >>> 
+// export function getAllCountries() {
+//     return async (dispatch) => {
+//       const res = await axios.get("/countries");
+//       dispatch({ type: GET_ALL_COUNTRIES, payload: res.data });
+//     };
+//   }
+
+
+// para produccion >>> 
+  export function getAllCountries() {
     return async (dispatch) => {
-      const res = await axios.get("/countries");
+
+      const res = await axios.get("https://worldcountries-app.herokuapp.com/countries");
       dispatch({ type: GET_ALL_COUNTRIES, payload: res.data });
     };
   }
