@@ -47,14 +47,12 @@ hr {
 }
 
 .countrydetail_flag {
-    width: 35%;
-    height: 40%;
-    max-height: 100px;
+    width: 150px;
+    height: 100px;
     border: 4px rgba(249, 249, 249, 0.1); 
     border-style:solid;
     object-fit:cover;
     box-shadow:0px 5px 10px rgba(0,0,0,1);
-    transition: transform 2s ease-in-out;
     opacity: 80%;
 }
 
