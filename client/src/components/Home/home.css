@@ -23,6 +23,15 @@ a {
     transition: transform 2s ease-in-out;
 }
 
+.countrydetail_flag {
+    width: 150px;
+    height: 100px;
+    border: 4px rgba(249, 249, 249, 0.1); 
+    border-style:solid;
+    object-fit:cover;
+    box-shadow:0px 5px 10px rgba(0,0,0,1);
+    opacity: 80%;
+}
 
 .country_flag:hover{
     transition: transform 2s ease-in-out;
