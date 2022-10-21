@@ -8,7 +8,6 @@ const axios = require('axios')
 router.get('/', async (req, res) => {
 
     const {name} = req.query
-
     try {
         const allCountries = await Country.findAll({include: Activity});
         if (name) {
@@ -53,14 +52,17 @@ router.get('/', async (req, res) => {
 // })
 
 router.get('/:id', async (req, res) => {
+
     const { id } = req.params
+    console.log(id.slice(0,3))
     let country;
 
     try {
 
-        country = await Country.findByPk(id.toUpperCase(), { include: Activity })
+        country = await Country.findByPk(id.slice(0,3).toUpperCase(), { include: Activity })
 
-        if (id.toUpperCase() == country.id) {
+
+        if (id.slice(0,3).toUpperCase() == country.id) {
             res.json(country)
         } else {
             res.json('Cant found an country with that ID')

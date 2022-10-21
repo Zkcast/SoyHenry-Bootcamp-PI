@@ -1,191 +1,123 @@
 ![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
 
 # Individual Project - Henry Countries
+## Sobre este proyecto.
 
 <p align="left">
-  <img height="200" src="./countries.png" />
+  <img height="400" src="./worldcountries.png" />
 </p>
 
-## Objetivos del Proyecto
 
-- Construir una App utlizando React, Redux, Node y Sequelize.
-- Afirmar y conectar los conceptos aprendidos en la carrera.
-- Aprender mejores prácticas.
-- Aprender y practicar el workflow de GIT.
-- Usar y practicar testing.
+Este proyecto ha sido realizado como proyecto individual para ser evaluado en SoyHenry Bootcamp.Forma parte de las últimas etapas del bootcamp donde se ponen en práctica todo lo aprendido durante el mismo.
 
-## Horarios y Fechas
-
-El proyecto tendrá una duración máxima de tres semanas. En el caso de que completan todas las tareas antes de dicho lapso podrán avisar a su Instructor para coordinar una fecha de presentación del trabajo (DEMO).
-
-## Comenzando
-
- 1. Forkear el repositorio para tener una copia del mismo en sus cuentas
- 2. Clonar el repositorio en sus computadoras para comenzar a trabajar
-
-Tendrán un `boilerplate` con la estructura general tanto del servidor como de cliente.
-
-__IMPORTANTE:__ Es necesario contar minimamente con la última versión estable de Node y NPM. Asegurarse de contar con ella para poder instalar correctamente las dependecias necesarias para correr el proyecto.
-
-Actualmente las versiónes necesarias son:
-
-- __Node__: 12.18.3 o mayor
-- __NPM__: 6.14.16 o mayor
-
-Para verificar que versión tienen instalada:
-
-```bash
-node -v
-npm -v
-```
-
-__ACLARACIÓN:__ Las dependencias actuales se encuentran en las versiones que venimos trabajando durante el bootcamp.
-
-Versiones:
-
-- __react__: 17.0.1
-- __react-dom__: 17.0.1
-- __react-router-dom__: 5.2.0
-- __redux__: 4.0.5
-- __react-redux__: 7.2.3
-
-Está permitido, __bajo su responsabilidad__, actualizar las dependencias a versiones más actuales.
-
-> __IMPORTANTE:__ Versiones mas actuales podrían presentar configuraciones diferentes respecto a las versiones en las que venimos trabajando durante el bootcamp.
-
-## BoilerPlate
-
-El boilerplate cuenta con dos carpetas: `api` y `client`. En estas carpetas estará el código del back-end y el front-end respectivamente.
-
-En `api` crear un archivo llamado: `.env` que tenga la siguiente forma:
-
-```env
-DB_USER=usuariodepostgres
-DB_PASSWORD=passwordDePostgres
-DB_HOST=localhost
-```
-
-Reemplazar `usuariodepostgres` y `passwordDePostgres` con tus propias credenciales para conectarte a postgres. Este archivo va ser ignorado en la subida a github, ya que contiene información sensible (las credenciales).
-
-Adicionalmente será necesario que creen desde psql una base de datos llamada `countries`
-
-El contenido de `client` fue creado usando: Create React App.
-
-## Enunciado
-
-La idea general es crear una aplicación en la cual se pueda ver información de  distintos paises utilizando la api externa [restcountries](https://restcountries.com/) y a partir de ella poder, entre otras cosas:
-
-- Buscar paises
-- Filtrarlos / Ordenarlos
-- Crear actividades turísticas
-
-__IMPORTANTE__: Para las funcionalidades de filtrado y ordenamiento NO pueden utilizar los endpoints de la API externa que ya devuelven los resultados filtrados u ordenados sino que deben realizarlo ustedes mismos. En particular alguno de los ordenamientos o filtrados debe si o si realizarse desde el frontend.
-
-### Únicos Endpoints/Flags que pueden utilizar
-
-- GET <https://restcountries.com/v3/all>
-- GET <https://restcountries.com/v3/name/{name}>
-- GET <https://restcountries.com/v3/alpha/{code}>
-
-### Requerimientos mínimos
-
-A continuación se detallaran los requerimientos mínimos para la aprobación del proyecto individial. Aquellos que deseen agregar más funcionalidades podrán hacerlo. En cuanto al diseño visual no va a haber wireframes ni prototipos prefijados sino que tendrán libertad de hacerlo a su gusto pero tienen que aplicar los conocimientos de estilos vistos en el curso para que quede agradable a la vista.
-
-__IMPORTANTE__: No se permitirá utilizar librerías externas para aplicar estilos a la aplicación. Tendrán que utilizar CSS con algunas de las opciones que vimos en dicha clase (CSS puro, CSS Modules o Styled Components)
-
-#### Tecnologías necesarias
+Está realizado en javascript con las siguientes tecnologías: 
 
 - [ ] React
 - [ ] Redux
 - [ ] Express
 - [ ] Sequelize - Postgres
 
-## Frontend
+Para la interface gráfica solo se usó CSS PURO.
 
-Se debe desarrollar una aplicación de React/Redux que contenga las siguientes pantallas/rutas.
+## Como funciona
 
-__Pagina inicial__: deben armar una landing page con
 
-- [ ] Alguna imagen de fondo representativa al proyecto
-- [ ] Botón para ingresar al home (`Ruta principal`)
+## BACKEND
 
-__Ruta principal__: debe contener
+Al momento de levantar el servidor con Node se obtienen los 250 paises que obtenemos de la peticion a la API RestCountries (https://restcountries.com/v3.1/all). Se extraen los datos necesarios y se introducen en una base de datos postgres utilizando sequelize. 
 
-- [ ] Input de búsqueda para encontrar países por nombre
-- [ ] Área donde se verá el listado de países. Al iniciar deberá cargar los primeros resultados obtenidos desde la ruta `GET /countries` y deberá mostrar su:
-  - Imagen de la bandera
-  - Nombre
-  - Continente
-- [ ] Botones/Opciones para filtrar por continente y por tipo de actividad turística
-- [ ] Botones/Opciones para ordenar tanto ascendentemente como descendentemente los países por orden alfabético y por cantidad de población
-- [ ] Paginado para ir buscando y mostrando los siguientes paises, 10 paises por pagina, mostrando los primeros 9 en la primer pagina.
+Extra: Para mejor experiencia de usuario al crear la base de datos se agregan por defecto 7 actividades y se relacionan con sus respectivos paises, esta info se encuentra en la ruta /api/extradb/activities.js
 
-__Ruta de detalle de país__: debe contener
+Luego de esto toda la aplicación no hace uso nunca más de la API y todas las peticiones se hacen directo a nuestra base de datos.
 
-- [ ] Los campos mostrados en la ruta principal para cada país (imagen de la bandera, nombre, código de país de 3 letras y continente)
-- [ ] Código de país de 3 letras (id)
-- [ ] Capital
-- [ ] Subregión
-- [ ] Área (Mostrarla en km2 o millones de km2)
-- [ ] Población
-- [ ] Actividades turísticas con toda su información asociada
+A partir de ahí tenemos las siguientes rutas funcionando con su respectiva informacion:
 
-__Ruta de creación de actividad turística__: debe contener
+- GET /countries -
+Devuelve todos los paises encontrados en la DB.
 
-- [ ] Un formulario __controlado con JavaScript__ con los siguientes campos:
-  - Nombre
-  - Dificultad
-  - Duración
-  - Temporada
-- [ ] Posibilidad de seleccionar/agregar varios países en simultáneo
-- [ ] Botón/Opción para crear una nueva actividad turística
+- GET /countries/{id} -
+Devuelve el país que coincida con ese ID (o que simplemente empiece con ese ID)
 
-> Es requisito que el formulario de creación esté validado con JavaScript y no sólo con validaciones HTML. Pueden agregar las validaciones que consideren. Por ejemplo: Que el nombre de la actividad no pueda contener símbolos, que la duración no pueda exceder determinado valor, etc.
+- GET /countries?name={id} -
+Devuelve el país que coincida con ese ID (Matcheo exacto exceptuando mayusculas y minusculas)
 
-## Base de datos
+- GET /Activities -
+Devuelve todas las actividades en la DB.
 
-El modelo de la base de datos deberá tener las siguientes entidades (Aquellas propiedades marcadas con asterísco deben ser obligatorias):
+- GET /Activities/{id} -
+Devuelve la actividad que coincida con ese ID (númerico)
 
-- [ ] País con las siguientes propiedades:
-  - ID (Código de 3 letras) *
-  - Nombre *
-  - Imagen de la bandera *
-  - Continente *
-  - Capital *
-  - Subregión
-  - Área
-  - Población
-- [ ] Actividad Turística con las siguientes propiedades:
-  - ID
-  - Nombre
-  - Dificultad (Entre 1 y 5)
-  - Duración
-  - Temporada (Verano, Otoño, Invierno o Primavera)
+- POST /Activities -
+Recibe por body una actividad. Si la actividad ya existe en la DB simplemente se relacionaran los paises que vengan por body a dicha actividad.
+En caso de que la actividad no exista, se creará con toda su info correspondiente.
 
-La relación entre ambas entidades debe ser de muchos a muchos ya que un país puede contener varias actividades turísticas y, a su vez, una actividad turística puede darse en múltiples países. Por ejemplo una actividad podría ser "Ski" que podría ocurrir en Argentina y también en Estados Unidos, pero a su vez Argentina podría también incluir "Rafting".
+## FRONTEND
 
-## Backend
+La ruta principal llevara al landing el cual nos presenta un botón para ingresar al home.
 
-Se debe desarrollar un servidor en Node/Express con las siguientes rutas:
+- Filtros y ordenamiento -
 
-__IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y paginados brindados por la API externa, todas estas funcionalidades tienen que implementarlas ustedes.
+  Dentro del home al cargar se renderizarán los 250 países de nuestra DB los cuales se podrán filtrar por nombre, continente, o actividad. Y se podrán ordenar por población (mayor y menor), por alfabeto (A-Z o Z-A).
 
-- [ ] __GET /countries__:
-  - En una primera instancia deberán traer todos los países desde restcountries y guardarlos en su propia base de datos y luego ya utilizarlos desde allí (Debe retonar sólo los datos necesarios para la ruta principal)
-  - Obtener un listado de los paises.
-- [ ] __GET /countries/{idPais}__:
-  - Obtener el detalle de un país en particular
-  - Debe traer solo los datos pedidos en la ruta de detalle de país
-  - Incluir los datos de las actividades turísticas correspondientes
-- [ ] __GET /countries?name="..."__:
-  - Obtener los países que coincidan con el nombre pasado como query parameter (No necesariamente tiene que ser una matcheo exacto)
-  - Si no existe ningún país mostrar un mensaje adecuado
-- [ ] __POST /activities__:
-  - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de actividad turística por body
-  - Crea una actividad turística en la base de datos, relacionada con los países correspondientes
+  Dichos filtros se pueden superponer y mantener siempre el orden requerido. 
+  Por ejemplo, podremos filtrar todos los paises que empiecen con A, sean de Europa, practiquen Surf, aplicarles el orden poblacional y seguirán activos mientras na
+  veges por la página ya sea en el home o en el detalle de cada país.
 
-## Testing
+- Navegación - 
 
-- [ ] Al menos tener un componente del frontend con sus tests respectivos
-- [ ] Al menos tener una ruta del backend con sus tests respectivos
-- [ ] Al menos tener un modelo de la base de datos con sus tests respectivos
+  Se mostrarán 10 paises por pagina y avanzarán de diez en diez al avanzar la navegación. Se mostrarán los ultimos diez al clickear la doble flecha de avance.
+  Lo mismo para retroceder.
+
+- Detalle de cada pais.
+
+  Nos mostrará algunos datos extra del país, incluido sus actividades relacionadas. Si no tiene actividad o queremos agregarle una, tendremos un boton que nos envia al formulario para crear la actividad para dicho país.
+
+- Actividades -
+
+  El botón "see all activities" en Home nos renderizará todas actividades en nuestra DB con su respectiva información. Podremos crear una actividad nueva o para cada actividad tendremos visible los paises asociados y un boton para agregarle paises a dicha actividad.
+
+- Refresh y HenryFilter
+
+  El boton refresh seteará todos los filtros y ordenamientos inactivos y volverá a hacer una nueva petición a la DB y renderizará los 250 paises nuevamente en su orden original.
+
+  El boton "HenryFilter" está hecho en base a un requisito solicitado por el bootcamp que era de mostrar los primeros 9 paises en la hoja 1 de la navegación. y luego 10 por página.
+  Al ser algo "antinatural" para la navegación decidi hacerlo en forma de filtro y al estar activo se verán de esa manera y al desactivarlo respondera a la navegación clásica de la App.
+
+## FORMULARIO DE CREACION DE ACTIVIDAD.
+
+  Se creará un estado local el cual será verificado mediante JavaScript antes de realizarse el post a la ruta /activities
+  El nombre no permitirá carácteres especiales, números ni podrá ser menor a 3 letras o mayor a 15.
+  Si se introdujera una actividad ya existente no se volverá a crear y simplemente se actualizará y se agregaran los paises a dicha actividad.
+
+## TEST BACKEND Y MODELS.
+
+  La app posee test para las rutas del backend y para los models de la base de datos.
+
+  [] Models:
+
+  - Activity -
+    Se testea que la propiedad NAME pueda ser solo un string y que sean enviados los valores requeridos (name y difficulty).
+
+  - Country -
+    Se testea que la propiedad NAME sea valida (string y no vacía), que CAPITAL sea un string y que los campos requeridos esten completos (id, name y nameSpanish)
+
+  [] Routes:
+
+  - Ambas rutas (/activities, /countries) testean lo mismo:
+
+    Se testea las respuestas del servidor, debería responder status 200 cuando se requiere una ruta válida y 404 cuando no exista.
+    Tambien se testea la ruta /id donde se espera recibir status 200 cuando encuentra correctamente un ID en la db. Caso contrario devuelve 400.
+
+
+## DEPLOY
+
+  El deploy del servidor y base de datos de la APP fue realizado en Heroku
+  - Ruta base:
+    https://worldcountries-app.herokuapp.com/
+
+  Para el frontend se usó vercel:
+  - Ruta base:
+    https://worldcountries-app.vercel.app/
+
+
+
