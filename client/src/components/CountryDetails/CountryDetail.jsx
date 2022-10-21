@@ -49,7 +49,7 @@ export const CountryDetail = (props) => {
 
 
                     <h1 className={Country.name.length < 17 ? 'countryname_detail' : 'countryname_small_detail'}>{Country.name.toUpperCase()} ({Country.id})</h1>
-                    <img className="country_flag" src={Country.flag} alt={Country.id} />
+                    <img className="detail_flagflag" src={Country.flag} alt={Country.id} />
                     <h3 className="">Capital: {Country.capital}</h3>
                     <div><h5 className="">{Country.subregion}</h5></div>
                     <small>Population: {Country.population}</small>
