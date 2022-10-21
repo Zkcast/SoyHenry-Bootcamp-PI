@@ -23,16 +23,6 @@ export const APPLY_REFRESH = "APPLY_REFRESH"
 // }
 
 
-// valido para desarrollo >>> 
-// export function getAllCountries() {
-//     return async (dispatch) => {
-//       const res = await axios.get("/countries");
-//       dispatch({ type: GET_ALL_COUNTRIES, payload: res.data });
-//     };
-//   }
-
-
-// para produccion >>> 
   export function getAllCountries() {
     return async (dispatch) => {
 
@@ -50,12 +40,15 @@ export const APPLY_REFRESH = "APPLY_REFRESH"
 //     }
 // }
 
+
 export function getAllActivities() {
     return async (dispatch) => {
-      const res = await axios.get("/activities");
+      const res = await axios.get("https://worldcountries-app.herokuapp.com/activities");
       dispatch({ type: GET_ALL_ACTIVITIES, payload: res.data });
     };
 }
+
+
 
 // export function addActivity(payload) {
 //     return async function () {
@@ -76,7 +69,7 @@ export function getAllActivities() {
 export function addActivity(payload) {
     return async function () {
         try {
-            const res = await axios.post('/activities', payload)
+            const res = await axios.post('https://worldcountries-app.herokuapp.com/activities/activities', payload)
             return res;
         } catch (error) {
             console.log(error)

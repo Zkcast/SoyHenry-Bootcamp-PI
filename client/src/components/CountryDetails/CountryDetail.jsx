@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllActivities, getAllCountries } from '../../redux/actions'
 import { Link } from 'react-router-dom'
+import add_small from '../../assets/icons/add_small.png'
+
 
 
 import './CountryDetail.css'
@@ -32,14 +34,6 @@ export const CountryDetail = (props) => {
     const prevCountry = filteredCountries[CountryIndex - 1]
 
 
-    // [ ] Los campos mostrados en la ruta principal para cada país (imagen de la bandera, nombre, código de país de 3 letras y continente)
-    // [ ] Código de país de 3 letras (id)
-    // [ ] Capital
-    // [ ] Subregión
-    // [ ] Área (Mostrarla en km2 o millones de km2)
-    // [ ] Población
-    // [ ] Actividades turísticas con toda su información asociada
-
     return (
         <div>
             <Link className='go_home' to='/home'><button className='go_home_button'>&#x276E; Home</button></Link>
@@ -60,23 +54,31 @@ export const CountryDetail = (props) => {
                     <div><h5 className="">{Country.subregion}</h5></div>
                     <small>Population: {Country.population}</small>
                     <div><small className="">Area: {Country.area}km²</small></div>
-                    <small><a target="_blank" href={`https://es.wikipedia.org/wiki/${Country.name}`} className="" >...learn more</a></small>
+                    <small className='small_more'><a target="_blank" href={`https://es.wikipedia.org/wiki/${Country.name}`} className="" >...learn more</a></small>
                     <hr></hr>
 
                     <div>
                         {Country.Activities.length > 0 ?
                             <div>
                                 <h2>Activities of {Country.name}:</h2>
+                                <div className='activitiesxcountry_container'>
                                 {
                                     Country.Activities.map((act) =>
-                                        <Link to='../activities'><small className="activity_name">
+                                        <div className="activity_name">
+                                        <small>
                                             <Link to={`../activities/${act.name}`}>{act.name.toUpperCase()}</Link>
-                                            {Country.Activities.indexOf(act) == (Country.Activities.length - 1) ? ' ' : ' - '}
-                                        </small></Link>)
+                                        </small>
+                                        </div>
+                                        )
+                                        
                                 }
-                                <div>
-                                    <Link to={`../activity/add/${Country.id}`}><small>+add more</small></Link>
                                 </div>
+                                <div>
+                                    {/* <Link to={`../activity/add/${Country.id}`}><small className='small_addmore'>+ add activity</small></Link> */}
+                                    <Link to={`../activity/add/${Country.id}`}><button className='addmore'>+ add activity</button></Link>
+
+                                </div>
+
                             </div> :
                             <div>
                                 <h3>There is no activities for {Country.name.toUpperCase()}</h3>
