@@ -69,7 +69,7 @@ export function getAllActivities() {
 export function addActivity(payload) {
     return async function () {
         try {
-            const res = await axios.post('https://worldcountries-app.herokuapp.com/activities/activities', payload)
+            const res = await axios.post('https://worldcountries-app.herokuapp.com/activities', payload)
             return res;
         } catch (error) {
             console.log(error)
