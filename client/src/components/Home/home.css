@@ -29,7 +29,6 @@ a {
     border: 4px rgba(98, 98, 98, 0.4); 
     border-style:solid;
     object-fit:cover;
-    opacity: 80%;
 }
 
 .country_flag:hover{
