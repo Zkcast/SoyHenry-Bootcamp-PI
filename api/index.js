@@ -33,8 +33,6 @@ const newDB = async () => {
             console.log(error)
           }
         })
-  
-
 
         activitiesOfWorld.forEach(async (act) => {
           try {
@@ -72,7 +70,7 @@ const newDB = async () => {
 
 newDB()
 
-conn.sync({ alter: true, force: true }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(process.env.PORT, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
