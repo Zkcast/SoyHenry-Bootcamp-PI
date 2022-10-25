@@ -24,21 +24,22 @@ const newDB = async () => {
     }
   })
 
-        // allCountries.forEach(async (country) => {
-        //   try {
-        //     await Country.findOrCreate({
-        //       where: country
-        //     })
-        //   } catch (error) {
-        //     console.log(error)
-        //   }
-        // })
+        allCountries.forEach(async (country) => {
+          try {
+            await Country.findOrCreate({
+              where: country
+            })
 
-        try {
-        await Country.bulkCreate(allCountries)}
-        catch(error) {
-          console.log(error)
-        }
+          } catch (error) {
+            console.log(error)
+          }
+        })
+
+        // try {
+        // await Country.bulkCreate(allCountries)}
+        // catch(error) {
+        //   console.log(error)
+        // }
 
         activitiesOfWorld.forEach(async (act) => {
           try {
@@ -73,8 +74,6 @@ const newDB = async () => {
         // catch(error) {
         //   console.log(error)
         //   }
-
-
 
 
 
