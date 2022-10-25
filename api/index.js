@@ -59,12 +59,8 @@ const newDB = async () => {
         // })
 
         try {
-          await Activity.bulkCreate(activitiesOfWorld)}
-          catch(error) {
-            console.log(error)
-          }
-
-        activitiesOfWorld.forEach(async (act) => {  
+          await Activity.bulkCreate(activitiesOfWorld)
+          activitiesOfWorld.forEach(async (act) => {  
             try {
               const finder = await Activity.findOne({ where: { name: act.name } })
               await finder.setCountries(CountriesWhere(act.name))
@@ -72,6 +68,12 @@ const newDB = async () => {
               console.log(error)
             }
         })
+        }
+        catch(error) {
+          console.log(error)
+          }
+
+
 
 
 
@@ -90,7 +92,7 @@ const newDB = async () => {
 
 newDB()
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ alter: true, force: false }).then(() => {
   server.listen(process.env.PORT, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
