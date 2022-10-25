@@ -63,7 +63,7 @@ const newDB = async () => {
           activitiesOfWorld.forEach(async (act) => {  
             try {
               // const finder = await Activity.findOne({ where: { name: act.name } })
-              const finder = await Activity.findOne({ where: { name: act } })
+              const finder = await Activity.findOne({ where: act })
               await finder.setCountries(CountriesWhere(act.name))
             } catch (error) {
               console.log(error)
