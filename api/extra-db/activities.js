@@ -20,7 +20,7 @@ let activitiesOfWorld = [
         duration: "02:00:00",
         season: "spring"
     },
-
+ 
     {
         name: "Skate",
         difficulty: "5",

@@ -40,39 +40,39 @@ const newDB = async () => {
           console.log(error)
         }
 
-        // activitiesOfWorld.forEach(async (act) => {
-        //   try {
+        activitiesOfWorld.forEach(async (act) => {
+          try {
 
-        //     await Activity.findOrCreate({
-        //       where: act
-        //     })  
-        //     try {
-        //       const finder = await Activity.findOne({ where: { name: act.name } })
-        //       await finder.setCountries(CountriesWhere(act.name))
-        //     } catch (error) {
-        //       console.log(error)
-        //     }
-
-        //   } catch (error) {
-        //     console.log(error)
-        //   }
-        // })
-
-        try {
-          await Activity.bulkCreate(activitiesOfWorld)
-          activitiesOfWorld.forEach(async (act) => {  
+            await Activity.findOrCreate({
+              where: act
+            })  
             try {
-              // const finder = await Activity.findOne({ where: { name: act.name } })
-              const finder = await Activity.findOne({ where: act })
+              const finder = await Activity.findOne({ where: { name: act.name } })
               await finder.setCountries(CountriesWhere(act.name))
             } catch (error) {
               console.log(error)
             }
-        })
-        }
-        catch(error) {
-          console.log(error)
+
+          } catch (error) {
+            console.log(error)
           }
+        })
+
+        // try {
+        //   await Activity.bulkCreate(activitiesOfWorld)
+        //   activitiesOfWorld.forEach(async (act) => {  
+        //     try {
+        //       // const finder = await Activity.findOne({ where: { name: act.name } })
+        //       const finder = await Activity.findOne({ where: act })
+        //       await finder.setCountries(CountriesWhere(act.name))
+        //     } catch (error) {
+        //       console.log(error)
+        //     }
+        // })
+        // }
+        // catch(error) {
+        //   console.log(error)
+        //   }
 
 
 
