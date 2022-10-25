@@ -62,7 +62,8 @@ const newDB = async () => {
           await Activity.bulkCreate(activitiesOfWorld)
           activitiesOfWorld.forEach(async (act) => {  
             try {
-              const finder = await Activity.findOne({ where: { name: act.name } })
+              // const finder = await Activity.findOne({ where: { name: act.name } })
+              const finder = await Activity.findOne({ where: { name: act } })
               await finder.setCountries(CountriesWhere(act.name))
             } catch (error) {
               console.log(error)
