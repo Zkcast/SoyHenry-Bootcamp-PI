@@ -93,7 +93,7 @@ const newDB = async () => {
 
 newDB()
 
-conn.sync({ alter: true, force: false }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(process.env.PORT, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
