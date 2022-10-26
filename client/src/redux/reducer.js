@@ -217,20 +217,22 @@ const rootReducer = (state = initialState, action) => {
 
             let countriesPerPages = state.countriesPerPages
             let henryfilter = state.filters.NineCountriesInFirstPage
+            let index = state.navigation.index
+            let page1 = state.navigation.page1
+            let page2 = state.navigation.page2
 
-            if (action.payload === 'back' && state.navigation.index !== 1) {
+            if (action.payload === 'back' && index !== 1) {
                 return {
                     ...state,
                     navigation: {
-                        page1: state.navigation.page1 < 10 ? 0 : ((state.navigation.page1 - countriesPerPages) + (henryfilter & state.navigation.index == 2 ? 1 : 0)),
-                        // page2: state.navigation.page1 < 10 && !henryfilter ? 10 : state.navigation.page2 - countriesPerPages,
-                        page2: state.navigation.index === 2 && henryfilter ? 9 : !henryfilter && state.navigation.index === 2? 10 : state.navigation.page2 - countriesPerPages,
-                        index: state.navigation.index - 1
+                        page1: index === 2 ? 0 : page1 - countriesPerPages,
+                        page2: index === 2 && henryfilter ? 9 : !henryfilter && index === 2? 10 : page2 - countriesPerPages,
+                        index: index - 1
                     }
                 }
             }
 
-            else if (action.payload === 'all_back' && state.navigation.index !== 1) {
+            else if (action.payload === 'all_back' && index !== 1) {
                 return {
                     ...state,
                     navigation: {
@@ -241,24 +243,24 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
 
-            else if (action.payload === 'forward' && state.navigation.page2 < state.filteredCountries.length) {
+            else if (action.payload === 'forward' && page2 < state.filteredCountries.length) {
                 return {
                     ...state,
                     navigation: {
-                        page1: ((state.navigation.page1 + countriesPerPages) - (henryfilter & state.navigation.index == 1 ? 1 : 0)),
-                        page2: state.navigation.page2 + countriesPerPages,
-                        index: state.navigation.index + 1
+                        page1: (page1 + countriesPerPages) - (henryfilter & index == 1 ? 1 : 0),
+                        page2: page2 + countriesPerPages,
+                        index: index + 1
                     },
                 }
             }
 
-            else if (action.payload === 'all_forward' && state.navigation.page2 < state.filteredCountries.length) {
+            else if (action.payload === 'all_forward' && page2 < state.filteredCountries.length) {
                 return {
                     ...state,
                     navigation: {
-                        page1: Math.ceil(state.filteredCountries.length - countriesPerPages) + (henryfilter ? 9 : 0),
-                        page2: Math.ceil(state.filteredCountries.length) + (henryfilter ? 9 : 0),
-                        index: Math.ceil(state.filteredCountries.length / countriesPerPages) + (henryfilter ? 1 : 0)
+                        page1: Math.ceil( (state.filteredCountries.length + (henryfilter ? 1 : 0)) - countriesPerPages ),
+                        page2: Math.ceil( state.filteredCountries.length + (henryfilter ? 1 : 0) ),
+                        index: Math.ceil( (state.filteredCountries.length + (henryfilter ? 1: 0)) / countriesPerPages )
                     },
                 }
 
