@@ -92,6 +92,7 @@ export const Home = () => {
         dispatch(applyActivity(e.target.value))
         dispatch(applyFilters())
         dispatch(applyOrder(order))
+        dispatch(resetNavigation())
         setFilterValues({
             ...filterValues,
             activity: e.target.value
