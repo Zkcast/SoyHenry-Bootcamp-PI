@@ -223,7 +223,8 @@ const rootReducer = (state = initialState, action) => {
                     ...state,
                     navigation: {
                         page1: state.navigation.page1 < 10 ? 0 : ((state.navigation.page1 - countriesPerPages) + (henryfilter & state.navigation.index == 2 ? 1 : 0)),
-                        page2: state.navigation.page1 < 10 && !henryfilter ? 10 : state.navigation.page2 - countriesPerPages,
+                        // page2: state.navigation.page1 < 10 && !henryfilter ? 10 : state.navigation.page2 - countriesPerPages,
+                        page2: state.navigation.index === 2 && henryfilter ? 9 : !henryfilter && state.navigation.index === 2? 10 : state.navigation.page2 - countriesPerPages,
                         index: state.navigation.index - 1
                     }
                 }
