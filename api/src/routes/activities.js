@@ -19,6 +19,17 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.delete('/deleteact', async (req,res) => {
+
+        const {name} = req.body
+        try {
+            await Activity.destroy({ where: { name: name } });
+            res.status(200).json(`${name} successfully deleted`)
+        } catch (error) {
+            res.status(400).json(`error cant delete ${name}`)}
+})
+
+
 router.post('/', async (req, res) => {
     const {
         name,
@@ -39,7 +50,6 @@ router.post('/', async (req, res) => {
 
         } else {
             
-
         let activity = await Activity.create({ name, difficulty, duration, season })
         await activity.setCountries(countries)
         res.status(200).json({msg: `Actividad ${activity.name} creada correctamente`})

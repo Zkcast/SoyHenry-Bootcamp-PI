@@ -26,7 +26,7 @@ export const APPLY_REFRESH = "APPLY_REFRESH"
   export function getAllCountries() {
     return async (dispatch) => {
 
-      const res = await axios.get("https://worldcountries-app.herokuapp.com/countries");
+      const res = await axios.get("/countries");
       dispatch({ type: GET_ALL_COUNTRIES, payload: res.data });
     };
   }
@@ -41,13 +41,27 @@ export const APPLY_REFRESH = "APPLY_REFRESH"
 // }
 
 
-export function getAllActivities() {
-    return async (dispatch) => {
-      const res = await axios.get("https://worldcountries-app.herokuapp.com/activities");
-      dispatch({ type: GET_ALL_ACTIVITIES, payload: res.data });
-    };
-}
 
+//***********************/
+// con async/await =>> 
+//
+// export function getAllActivities() {
+//     return async (dispatch) => {
+//       const res = await axios.get("/activities");
+//       dispatch({ type: GET_ALL_ACTIVITIES, payload: res.data });
+//     };
+// }
+// con promesas >>
+export const getAllActivities = () => {
+    return function (dispatch) {
+      return axios.get("/activities").then(res => {
+          dispatch({ 
+            type: GET_ALL_ACTIVITIES, 
+            payload: res.data 
+        });
+    })
+    }};
+//********************** */
 
 
 // export function addActivity(payload) {
@@ -71,7 +85,7 @@ export function getAllActivities() {
 export function addActivity(payload) {
     return async function () {
         try {
-            const res = await axios.post('https://worldcountries-app.herokuapp.com/activities', payload)
+            const res = await axios.post('/activities', payload)
             return res;
         } catch (error) {
             console.log(error)

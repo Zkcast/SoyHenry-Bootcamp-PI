@@ -9,6 +9,7 @@
 }
 
 .activityContainer {
+    animation: appear 0.3s;
     width: fit-content;
     height: fit-content;
     max-width: 162px;
@@ -32,6 +33,7 @@
 }
 
 .mainActivityContainer {
+        animation: appear 1s;
         width: fit-content;
         height: fit-content;
         max-width: 162px;

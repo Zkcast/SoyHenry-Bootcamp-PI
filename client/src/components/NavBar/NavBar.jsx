@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { resetNavigation, navBarInput, applyFilters, applyRefresh, getAllCountries } from '../../redux/actions';
 import HomeIMG from "../../assets/icons/home.png"

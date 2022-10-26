@@ -42,10 +42,18 @@ export const AddActivity = (props) => {
         season: '',
         countries: []
     })
-
+     
     const [selectedFullCountries, setFullCountry] = useState([])
     const [hover, setHover] = useState(0);
     const existingActivity = allActivities.some(act => act.name == input.name)
+
+    let fullFilled = 
+    input.name && 
+    input.difficulty && 
+    input.duration && 
+    input.season && 
+    input.countries.length > 0 ? 
+    true : false
 
     // ---- Handlers ----
     const handleFullCountry = (id) => {
@@ -84,14 +92,15 @@ export const AddActivity = (props) => {
 
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(addActivity(input))
-        history.push(`/activities/${input.name}`)
-        if (existingActivity) {
-            alert(`Countries successfully added to ${input.name}`)
+    e.preventDefault();
+
+        if (fullFilled) {
+            dispatch(addActivity(input))
+            history.push(`/activities/${input.name}`)
+            existingActivity ? 
+            alert(`Countries successfully added to ${input.name}`) : alert(`Activity ${input.name} successfully created`)
         } else {
-            alert(`Activity ${input.name} successfully created`)
-        }
+            alert('Faltan completar datos')}
     }
 
     const handleSubmitError = (e) => {

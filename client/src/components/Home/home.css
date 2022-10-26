@@ -1,3 +1,12 @@
+@keyframes appear {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 
 .main_country_container {
     margin-left: 15%;
@@ -12,7 +21,9 @@ a {
     text-decoration: none;
     color:rgb(38, 20, 96, 1);
   }
+
 .country_flag {
+    animation: appear 0.2s;
     width: 5rem; 
     height: 5rem; 
     border: 4px rgba(249, 249, 249, 0.1); 
@@ -37,6 +48,7 @@ a {
 }
 
 .flagContainer {
+    animation: appear 0.2s;
     width: 180px;
     height: 220px;
     background-size:cover;
