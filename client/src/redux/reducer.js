@@ -9,7 +9,7 @@ import {
     RESET_NAVIGATION,
     APPLY_ORDER,
     APPLY_ACTIVITY,
-    APPLY_REFRESH,
+    APPLY_REFRESH
 
 } from "./actions";
 
@@ -25,7 +25,7 @@ const initialState = {
         continents: "All continents",
         orderby: '',
         NineCountriesInFirstPage: false,
-        activity: ''
+        activity: '',
     }
 
 }
@@ -33,7 +33,6 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
 
     switch (action.type) {
-
 
         case GET_ALL_COUNTRIES:
             return {

@@ -31,9 +31,6 @@ export const Home = () => {
 
     }, [])
 
-
-
-
     // --- Selectors ---
     const filteredCountries = useSelector(state => state.filteredCountries)
     const navigation = useSelector(state => state.navigation)
@@ -53,7 +50,6 @@ export const Home = () => {
         orderby: order,
         activity: activity
     })
-
 
     // ---- Handlers ---- 
     const handleHenryFilter = () => {
@@ -111,9 +107,9 @@ export const Home = () => {
 
     return (
 
-        <div>
+        <div key='render'>
 
-            <div>
+            <div key='navButtons'>
                 <button name='refresh' className='refresh' title='' onClick={handleRefresh}>Refresh</button>
                 <Link to='/activities'><button name='allActivities' className='see_activities_button'>See all activities</button></Link>
                 <button name='henryfilter' className={henryFilter ? 'active' : 'disabled'} onClick={handleHenryFilter}>HenryFilter</button>
@@ -152,8 +148,9 @@ export const Home = () => {
 
             {/* ---- Navigation ---- */}
 
+
             {!loading &&
-                <div className='navigation'>
+                <div key='navigation' className='navigation'>
                     <button className={navigation.page1 > 0 ? 'navBoton' : 'hidden_navBoton'} name='all_back' title='Show first ten' onClick={handlePagination}>&#x276E;&#x276E;</button>
                     <button className={navigation.page1 > 0 ? 'navBoton' : 'hidden_navBoton'} name='back' onClick={handlePagination}>&#x276E;</button>
                     {navigation.index !== 0 ? navigation.index : ""}
@@ -164,7 +161,7 @@ export const Home = () => {
 
 
             {/* ---- Main countries container  */}
-            <div className='main_country_container'>
+            <div key='main_country_container' className='main_country_container'>
                 {
                     loading ? (<p>Loading...</p>) :
                         (

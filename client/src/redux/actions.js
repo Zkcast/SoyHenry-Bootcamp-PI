@@ -25,7 +25,6 @@ export const APPLY_REFRESH = "APPLY_REFRESH"
 
   export function getAllCountries() {
     return async (dispatch) => {
-
       const res = await axios.get("/countries");
       dispatch({ type: GET_ALL_COUNTRIES, payload: res.data });
     };
@@ -137,4 +136,3 @@ export function applyActivity(payload) {
 export function applyRefresh() {
     return { type: APPLY_REFRESH }
 }
-

@@ -34,6 +34,7 @@ export const AddActivity = (props) => {
     })
 
 
+
     // ---- Local States ----
     const [input, setInput] = useState({
         name: '',
@@ -42,6 +43,8 @@ export const AddActivity = (props) => {
         season: '',
         countries: []
     })
+
+    const [error, setError] = useState(false)
      
     const [selectedFullCountries, setFullCountry] = useState([])
     const [hover, setHover] = useState(0);
@@ -54,6 +57,8 @@ export const AddActivity = (props) => {
     input.season && 
     input.countries.length > 0 ? 
     true : false
+
+
 
     // ---- Handlers ----
     const handleFullCountry = (id) => {
@@ -100,12 +105,13 @@ export const AddActivity = (props) => {
             existingActivity ? 
             alert(`Countries successfully added to ${input.name}`) : alert(`Activity ${input.name} successfully created`)
         } else {
-            alert('Faltan completar datos')}
+            setError(true)
+            // alert('Faltan completar datos')
+        }
     }
 
     const handleSubmitError = (e) => {
         e.preventDefault();
-        alert('Name must have at least 3 characters.')
     }
 
     const handleIconDelete = (e) => {
@@ -139,7 +145,7 @@ export const AddActivity = (props) => {
                             type='text'
                             name='name'
                             placeholder='Activity name: '
-                            required />
+                            />
                     </div>
                     <div>
                     </div>
@@ -230,6 +236,7 @@ export const AddActivity = (props) => {
                     <div>
                         {input.name.length > 0 && input.name.length < 3 ? <small className='errors'>Name must have at least 3 characters</small> : ''}
                         {existingActivity ? <small className='adding_cuntries_msg'>Adding countries to {input.name}</small> : ''}
+                        {error ? <small className='errors'>All fields are required</small> : ''}
                     </div>
 
                 </form>
