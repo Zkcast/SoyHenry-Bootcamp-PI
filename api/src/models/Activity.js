@@ -21,15 +21,6 @@ module.exports = (sequelize) => {
           season: {
                type: DataTypes.ENUM('summer', 'autumm', 'winter', 'spring'),
           },
-          difficultyrate: {
-               type: DataTypes.VIRTUAL,
-               get() {
-                    return (Number(this.difficulty) + 1);
-               },
-               set() {
-                    throw new Error('Error!');
-               }
-          }
      },
           {
                timestamps: false,
