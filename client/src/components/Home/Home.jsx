@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import maps_img from "../../assets/icons/ubication.png"
 import './home.css'
 import {
@@ -29,6 +30,8 @@ export const Home = () => {
             setLoading(false)
         }, 300);
 
+        if (allCountries.lenth < 1) {handleAwaitData()}
+        
     }, [])
 
     // --- Selectors ---
@@ -39,7 +42,7 @@ export const Home = () => {
     const continent = useSelector(state => state.filters.continents)
     const activity = useSelector(state => state.filters.activity)
     const order = useSelector(state => state.filters.orderby)
-
+    const allCountries = useSelector(state => state.allCountries)
 
 
     // ---- Local states ----
@@ -52,6 +55,34 @@ export const Home = () => {
     })
 
     // ---- Handlers ---- 
+
+
+    const handleAwaitData = () => {
+
+        if (allCountries.length < 1) {
+            Swal.fire({
+                title: 'We are fetching data, please wait..',
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+            });
+
+            dispatch(getAllCountries())
+            dispatch(getAllActivities())
+
+            setTimeout(function () {
+                handleAwaitData() 
+            }, 4000);
+
+        } else {
+            Swal.close()
+        }
+
+
+    }
+
+
     const handleHenryFilter = () => {
         dispatch(applyHenryFilter())
         dispatch(resetNavigation())

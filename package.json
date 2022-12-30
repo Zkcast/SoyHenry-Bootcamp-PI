@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Zkcast/SoyHenry-Bootcamp-PI/issues"
   },
-  "homepage": "https://github.com/Zkcast/SoyHenry-Bootcamp-PI#readme"
+  "homepage": "https://github.com/Zkcast/SoyHenry-Bootcamp-PI#readme",
+  "dependencies": {
+    "sweetalert2": "^11.6.16"
+  }
 }
