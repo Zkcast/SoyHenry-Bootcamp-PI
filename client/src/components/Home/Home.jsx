@@ -187,13 +187,14 @@ export const Home = () => {
 
                                 ) :
                                 (
-                                    filteredCountries.length === 0 && allCountries.length === 0 ?
+                                    filteredCountries.length === 0 && allCountries.length > 0 ?
+                                        <p className='navigation'>No country with that name. Try again</p>
+                                        :
                                         <div><div><p className='navigation'>Fetching data from server, it may take about a minute. Please wait...</p></div>
                                             <div><img className='loadingGif' src={loadingIcon}></img>
                                             </div>
                                         </div>
-                                        :
-                                        <p className='navigation'>No country with that name. Try again</p>
+
                                 )
                         )
                 }
