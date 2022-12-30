@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import Swal from 'sweetalert2'
 import maps_img from "../../assets/icons/ubication.png"
+import loadingIcon from "../../assets/icons/loading.gif"
+
 import './home.css'
 import {
     applyHenryFilter,
@@ -30,8 +31,6 @@ export const Home = () => {
             setLoading(false)
         }, 300);
 
-        if (allCountries.lenth < 1) {handleAwaitData()}
-        
     }, [])
 
     // --- Selectors ---
@@ -56,31 +55,6 @@ export const Home = () => {
 
     // ---- Handlers ---- 
 
-
-    const handleAwaitData = () => {
-
-        if (allCountries.length < 1) {
-            Swal.fire({
-                title: 'We are fetching data, please wait..',
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                },
-            });
-
-            dispatch(getAllCountries())
-            dispatch(getAllActivities())
-
-            setTimeout(function () {
-                handleAwaitData() 
-            }, 4000);
-
-        } else {
-            Swal.close()
-        }
-
-
-    }
 
 
     const handleHenryFilter = () => {
@@ -211,9 +185,21 @@ export const Home = () => {
                                         <h5>{country.continent}</h5>
                                     </div>
 
-                                ) : <p className='navigation'>No country with that name. Try again</p>
+                                ) :
+                                (
+                                    filteredCountries.length === 0 && allCountries.length === 0 ?
+                                        <div><div><p className='navigation'>Fetching data from server, it may take about a minute. Please wait...</p></div>
+                                            <div><img className='loadingGif' src={loadingIcon}></img>
+                                            </div>
+                                        </div>
+                                        :
+                                        <p className='navigation'>No country with that name. Try again</p>
+                                )
                         )
                 }
+
+
+
 
             </div>
 
